@@ -1,0 +1,95 @@
+---
+title: "Herpetofauna del Caribe Colombiano - Analisis Exploratorio"
+subtitle: "Taller Semana 3 · Curso 20953"
+author: "Jhonel Padilla"
+date: "2026-05-12"
+format:
+  html:
+    toc: true
+    toc-depth: 3
+    code-fold: false
+    theme: cosmo
+---
+
+## Introducción
+
+Este documento presenta un análisis exploratorio de un conjunto de datos sobre herpetofauna del Caribe colombiano recolectados durante el año 2023. El dataset incluye registros de anfibios y reptiles provenientes de diferentes ecosistemas de los departamentos del Atlántico y Magdalena.
+
+En este análisis se estudiarán variables como **ecosistema**, **clase**, **peso corporal** y *longitud hocico-cloaca*. Además, el archivo utilizado fue cargado mediante el comando `read.csv()` en R.
+
+## Carga y exploración del dataset
+
+```{r}
+#| label: cargar-datos
+
+herp <- read.csv("datos/herpetofauna_caribe_listo.csv")
+
+dim(herp)
+
+head(herp)
+
+str(herp)
+```
+
+El conjunto de datos contiene información taxonómica, morfométrica y ecológica de diferentes especies de herpetofauna registradas en el Caribe colombiano.
+
+## Gráfico 1 — Registros por ecosistema
+
+```{r}
+#| label: grafico-ecosistema
+#| fig-cap: "Distribución de registros de herpetofauna por ecosistema. Fuente: datos del curso."
+
+barplot(
+  table(herp$ecosistema),
+  col = "darkgreen",
+  main = "Registros por ecosistema",
+  xlab = "Ecosistema",
+  ylab = "Frecuencia"
+)
+```
+
+El ecosistema con mayor cantidad de registros presenta una mayor representación dentro del conjunto de datos analizado.
+
+## Gráfico 2 — Peso corporal por clase
+
+```{r}
+#| label: grafico-peso
+#| fig-cap: "Distribución del peso corporal por clase taxonómica."
+
+boxplot(
+  peso_g ~ clase,
+  data = herp,
+  col = c("orange", "skyblue"),
+  main = "Peso corporal por clase",
+  xlab = "Clase",
+  ylab = "Peso (g)"
+)
+```
+
+El gráfico permite comparar la distribución del peso corporal entre anfibios y reptiles.
+
+## Observación metodológica
+
+::: callout-note
+Este análisis exploratorio permite visualizar patrones generales en los datos biológicos.
+:::
+
+## Limitación del análisis
+
+::: callout-warning
+Los resultados dependen de la calidad de los registros presentes en el dataset.
+:::
+
+## Recomendación futura
+
+::: callout-tip
+Sería útil incorporar registros adicionales y variables climáticas.
+:::
+
+## Reflexiones
+
+Un documento Quarto permite combinar texto, código y resultados en un solo archivo reproducible.
+
+Si se agregaran nuevos registros, bastaría con actualizar el CSV y renderizar nuevamente el documento.
+
+Un repositorio público en GitHub favorece la transparencia y la ciencia abierta.
